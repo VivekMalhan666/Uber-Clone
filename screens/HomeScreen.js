@@ -4,12 +4,8 @@ import tw from 'tailwind-react-native-classnames';
 import NavOption from '../components/NavOption';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
-import { useDispatch } from 'react-redux';
-import {
-  selectDestination,
-  setDestination,
-  setOrigin,
-} from '../slice/navSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDestination, setOrigin } from '../slice/navSlice';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -55,6 +51,7 @@ const HomeScreen = () => {
           placeholder="Where From?"
           nearbyPlacesAPI="GooglePlacesSearch"
           debounce={400}
+          listViewDisplayed={false}
         />
         <NavOption />
       </View>
