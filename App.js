@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
-import MapScreen from './components/MapScreen';
+import MapScreen from './screens/MapScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
