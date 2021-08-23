@@ -10,7 +10,9 @@ import {
   Image,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 import tw from 'tailwind-react-native-classnames';
+import { selectTravelTimeInformation } from '../slice/navSlice';
 
 const data = [
   {
@@ -32,9 +34,13 @@ const data = [
     image: 'https://links.papareact.com/7pf',
   },
 ];
+
+const SURGE_CHARGE_RATE = 1.5;
+
 const RideOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const traveTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
@@ -45,7 +51,9 @@ const RideOptionsCard = () => {
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>Select a Ride</Text>
+        <Text style={tw`text-center py-5 text-xl`}>
+          Select a Ride - {traveTimeInformation?.distance?.text}
+        </Text>
       </View>
       <FlatList
         data={data}
@@ -67,13 +75,23 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>Travel time....</Text>
+              <Text>{traveTimeInformation?.duration?.text} Travel time</Text>
             </View>
-            <Text style={tw`text-xl`}>$99</Text>
+            <Text style={tw`text-xl`}>
+              {new Intl.NumberFormat('en-gb', {
+                style: 'currency',
+                currency: 'GBP',
+              }).format(
+                (traveTimeInformation?.duration.value *
+                  SURGE_CHARGE_RATE *
+                  multiplier) /
+                  100
+              )}
+            </Text>
           </TouchableOpacity>
         )}
       />
-      <View>
+      <View style={tw`mt-auto border-t border-gray-300`}>
         <TouchableOpacity
           style={tw`bg-black py-3 m-3 ${!selected && 'bg-gray-400'}`}
           disabled={!selected}
