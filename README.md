@@ -1,12 +1,15 @@
-This project was bootstrapped with '[EXPO]'.
+This project was bootstrapped with `EXPO`.
 
 ### Key Features include:
 
 - React Hooks
 - React Redux
+- React Navigation
 - Google Maps
 - Destination and Origin of User
 - Price and time of travel based on distance and type of car
+- Tailwind css
+- React Native Icons
 
 ## Available Scripts
 
